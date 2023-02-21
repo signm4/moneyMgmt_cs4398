@@ -52,7 +52,7 @@ Which will load Flask and other required packages. One of those packages will be
 Flask apps are run with the `flask run` command, but before you do that, you need to set an environment variable `FLASK_APP` to say which app you want to run.
 
 ```cmd
-FLASK_APP=hellofly flask run
+FLASK_APP=project flask run
 ```
 ```out
  * Serving Flask app "hellofly"
