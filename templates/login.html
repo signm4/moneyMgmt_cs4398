@@ -1,7 +1,66 @@
-
+<!DOCTYPE html>
 <html>
-  <link rel="stylesheet" href="{{ url_for('static', filename = 'css/login.css') }}">
-    <h1>this is the login page</h1>
-    <button onclick="hello.html">Login</button>
-    
+  <head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+      }
+      #login-form {
+        background-color: #ffffff;
+        width: 300px;
+        margin: 0 auto;
+        margin-top: 100px;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px #cccccc;
+      }
+      h1 {
+        text-align: center;
+      }
+      label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+      }
+      input[type="text"], input[type="password"] {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        border: 1px solid #cccccc;
+      }
+      input[type="submit"] {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        background-color: #4CAF50;
+        color: #ffffff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      input[type="submit"]:hover {
+        background-color: #3e8e41;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="login-form">
+ <body>
+    <h1>Login</h1>
+    <form method="POST" action="/login">
+      <label>Username:</label>
+      <input type="text" name="username" required>
+      <br>
+      <label>Password:</label>
+      <input type="password" name="password" required>
+      <br>
+      <input type="submit" value="Login">
+    </form>
+    <p>Don't have an account? <a href="/signup">Sign up here</a></p>
+  </body>
 </html>
