@@ -8,6 +8,7 @@ def addItem(myList):
 def printList(list):
     for i, item in enumerate(list):
         print(i + 1, item)
+        return(i + 1, item)
 
 def basePrice(item):
     if(item[2] == "daily"):
@@ -66,6 +67,11 @@ def deleteItem(myList):
         print("ERROR: INVALID INPUT")
     
     return myList
+
+def calculate_interest(principal, rate, time):
+    interest = (principal * rate * time) / 100
+    return interest
+
 
 # Add a changeItem function.
 

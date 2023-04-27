@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Money Management</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <nav>
+        <h1>Money Management</h1>
+        <ul>
+            <li><a href="{{ url_for('index') }}">Home</a></li>
+            <li><a href="#">Budgeting</a></li>
+            <li><a href="#">Investing</a></li>
+            <li><a href="{{ url_for('expenses') }}">Expenses</a></li>
+        </ul>
+    </nav>
+    <main>
+        <h2>All Users</h2>
+        <ul>
+            {% for user in users %}
+            <li>{{ user[1] }} ({{ user[2] }})</li>
+            {% endfor %}
+        </ul>
+    </main>
+</body>
+</html>
+
+	<div id="about">
+		<h2>About Us</h2>
+		<p>We are a money management website that aims to help people with their finances.</p>
+	</div>
+</body>
+</html>
