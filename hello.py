@@ -59,7 +59,7 @@ def do_signup():
     with open('users.txt', 'a') as file:
         file.write(f"{username}:{password}\n")
 
-    return "Registration successful!"
+    return render_template('login.html', username=username)
 
 # old login method via text file 
 @app.route('/login', methods=['POST'])
@@ -108,6 +108,11 @@ def do_login():
 def index():
     return render_template('index.html')
 
+@app.route('/home')
+def go_home():
+    # username = session['username']
+    return render_template('index.html')
+
 @app.route('/calculate', methods=['POST'])
 def calculate():
     # Get user input from form
@@ -124,24 +129,15 @@ def calculate():
 
 @app.route('/expenses', methods=['GET', 'POST'])
 def expenses():
+
     if request.method == 'POST':
-        name = request.form['name']
+        # name = request.form['name']
         amount = request.form['amount']
         frequency = request.form['frequency']
         
-        # conn = sqlite3.connect('money.db')
-        # c = conn.cursor()
-        # c.execute("INSERT INTO expenses (name, amount, frequency) VALUES (?, ?, ?)", (name, amount, frequency))
-        # conn.commit()
-        # conn.close()
         
         return redirect('/expenses')
     else:
-        # conn = sqlite3.connect('money.db')
-        # c = conn.cursor()
-        # c.execute("SELECT * FROM expenses")
-        # expenses = c.fetchall()
-        # conn.close()
         
         return render_template('expenses.html', expenses=expenses)
     

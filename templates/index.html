@@ -134,8 +134,37 @@
             <li><a href="/expenses">Expenses</a></li>
         </ul>
     </nav>
+    <div class="container">
+        <div class="row">
+          <div class="col-sm-4">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Income</h5>
+                <p class="card-text">{{ current_income }}</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Expenses</h5>
+                <p class="card-text">{{ current_expenses }}</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Left Over</h5>
+                <p class="card-text">{{ current_leftover }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
 </body>
-</html>
+
 
 	<div id="about">
 		<h2>About Us</h2>

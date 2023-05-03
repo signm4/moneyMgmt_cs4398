@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        title{
+            font-size:30px;
+            font-weight:bold;
+            color:green;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+        }
+        h1 {
+            text-align: center;
+            margin: 20px 0;
+            font-size: 30px;
+            font-weight: bold;
+            color: Green;
+        }
+        h3 {
+            text-align: left;
+            margin: 20px 0;
+        }
+        select {
+            font-size: 18px;
+            padding: 10px;
+            margin: 20px;
+            border: none;
+            background-color: #f2f2f2;
+            color: #333;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+        select:focus {
+            outline: none;
+        }
+        .square {
+            display: inline-block;
+            width: 300px;
+            height: 300px;
+            border: 1px solid #ccc;
+            margin: 20px;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+        .square h2 {
+            margin-top: 0;
+        }
+        form {
+            margin-top: 20px;
+            text-align: center;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input[type=number] {
+            font-size: 16px;
+            padding: 10px;
+            border: none;
+            background-color: #f2f2f2;
+            color: #333;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 10px;
+            width: 100%;
+        }
+        input[type=submit] {
+            background-color: #4CAF50;
+            color: #fff;
+            font-size: 16px;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        input[type=submit]:hover {
+            background-color: #3e8e41;
+        }
+        #about {
+            background-color: #ccc;
+            padding: 20px;
+            margin: 20px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #333;
+            }
+
+        li {
+            float: left;
+            }
+
+        li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            }
+
+        li a:hover:not(.active) {
+            background-color: #111;
+            }
+
+        .active {
+            background-color: #04AA6D;
+            }
+    </style>
+
+
+    <title>$$-MGMT | Can I spend it?</title>
+    <!-- <link rel="stylesheet" type="text/css" href="/style"> -->
+</head>
+<body>
+    <nav>
+        <h1>Money Management</h1>
+        <h3>Welcome, <i>{{ username }}!</i></h3>
+        <ul>
+            <li><a href="/home">Home</a></li>
+            <li><a href="/spend">Can I spend it?</a></li>
+            <li><a class = "active" href="/income">Income</a></li>
+            <li><a href="/expenses">Expenses</a></li>
+        </ul>
+    </nav>
+    <main>
+        <h2>Add Income</h2>
+        <form action="{{ url_for('income') }}" method="post">
+            <!-- <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+            <br> -->
+            <label for="amount">Amount:</label>
+            <input type="number" id="amount" name="amount" required>
+            <br>
+            <label for="frequency">Frequency:</label>
+            <select id="frequency" name="frequency" required>
+                <option value="daily">Daily</option>
+                <option value="weekly">Weekly</option>
+                <option value="monthly">Monthly</option>
+                <option value="annually">Annually</option>
+            </select>
+            <br>
+            <button type="submit">Add Income</button>
+        </form>
+    </main>
+</body>
+</html>
