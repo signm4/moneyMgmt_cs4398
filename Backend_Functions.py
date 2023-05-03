@@ -1,16 +1,52 @@
 import numpy as np
 
-def addItem(myList):
-    itemName = input("Enter item name: ")
-    price = input("Enter item price: ")
-    myList.append([itemName, price])
+# Constructor with name
+def addItem2(name, price, interval):
 
-def printList(list):
-    for i, item in enumerate(list):
-        print(i + 1, item)
-        return(i + 1, item)
+    myFile = open("storageFile.txt", "r")
+    previousData = myFile.read()
 
-def basePrice(item):
+    myFile = open("storageFile.txt", "w")
+    myFile.write(previousData)
+    myFile.write("Name: " + name + "\n")
+    myFile.write("Price: " + price + "\n")
+    myFile.write("Interval: " + interval + "\n")
+
+# Constructor without name
+def addItem1(price, interval):
+    myFile = open("storageFile.txt", "r")
+    previousData = myFile.read()
+
+    myFile = open("storageFile.txt", "w")
+    myFile.write(previousData)
+    myFile.write("Price: " + price + "\n")
+    myFile.write("Interval: " + interval + "\n")
+
+def printList():
+    myFile = open("storageFile.txt", "r")
+    print(myFile.read())
+
+def pop():
+    myFile = open("storageFile.txt", "r")
+    myString = myFile.read()
+    # I find the first instance of the word "interval".
+    myString = myString[myString.find("Interval:"):]
+    if(myString.find("Name:") < myString.find("Price:") and myString.find("Name:") != -1):
+        myString = myString[myString.find("Name:"):]
+    else:
+        myString = myString[myString.find("Price:"):]
+
+    myFile = open("storageFile.txt", "w")
+    myFile.write(myString)
+
+
+
+
+
+
+
+
+'''def basePrice(item):
     if(item[2] == "daily"):
         return item[1]
     elif(item[2] == "weekly"):
@@ -71,45 +107,4 @@ def deleteItem(myList):
 def calculate_interest(principal, rate, time):
     interest = (principal * rate * time) / 100
     return interest
-
-
-# Add a changeItem function.
-
-# Add a data .itt file or something similar to read data from and into files to save into 
-# the program.
-
-# Add a percent function that prints the percentages of all expenses.
-
-# Document everything
-
-
-
-
-
-
-
-print("Start Program")
-
-EXIT = False
-priceList = [["Food", 10.23, "daily"],["Gas", 15.11, "weekly"],["Rent", 33.00, "monthly"],["Water", 2.99, "daily"],["Clothes", 20.54, "monthly"]]
-print("Enter \"h\" to ask for help.")
-
-while EXIT is not True:
-    userChoice = input("Input: ")
-    userChoice = userChoice.upper()
-    if userChoice == 'H' or userChoice == 'HELP':
-        printHelpMenu()
-    elif userChoice == 'E' or userChoice == 'EXIT':
-        EXIT = True
-    elif userChoice == 'P' or userChoice == 'PRINT' or userChoice == 'PRINTLIST':
-        printList(priceList)
-    elif userChoice == 'N' or userChoice == 'NEW' or userChoice == 'NEWITEM':
-        addItem(priceList)
-    elif userChoice == 'PA' or userChoice == 'PRINTAVERAGE':
-        printAverage(priceList)
-    elif userChoice == 'D' or userChoice == "DELETE" or userChoice == "DELETEITEM":
-        priceList = deleteItem(priceList)
-    else:
-        print("ERROR: COMMAND NOT RECOGNIZED")
-
-print("Program Exit")
+'''
