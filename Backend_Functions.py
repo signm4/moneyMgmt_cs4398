@@ -1,33 +1,47 @@
 import numpy as np
 
-# Constructor with name
-def addItem2(name, price, interval):
+def addItem(userName, price, interval):
+    fileName = userName + ".txt"
 
-    myFile = open("storageFile.txt", "r")
+    try:
+        myFile = open(fileName, "r")
+    except:
+        myFile = open(fileName, "x")
+
+    myFile = open(fileName, "r")
     previousData = myFile.read()
 
-    myFile = open("storageFile.txt", "w")
-    myFile.write(previousData)
-    myFile.write("Name: " + name + "\n")
-    myFile.write("Price: " + price + "\n")
-    myFile.write("Interval: " + interval + "\n")
-
-# Constructor without name
-def addItem1(price, interval):
-    myFile = open("storageFile.txt", "r")
-    previousData = myFile.read()
-
-    myFile = open("storageFile.txt", "w")
+    myFile = open(fileName, "w")
     myFile.write(previousData)
     myFile.write("Price: " + price + "\n")
-    myFile.write("Interval: " + interval + "\n")
+    myFile.write("Interval: " + interval + "\n\n")
 
-def printList():
-    myFile = open("storageFile.txt", "r")
+def addIncome(userName, price, interval):
+    addItem(userName, price, interval)
+
+def addExpense(userName, price, interval):
+    addItem(userName, price, interval)
+
+def printList(userName):
+    fileName = userName + ".txt"
+
+    try:
+        myFile = open(fileName, "r")
+    except:
+        myFile = open(fileName, "x")
+
+    myFile = open(fileName, "r")
     print(myFile.read())
 
-def pop():
-    myFile = open("storageFile.txt", "r")
+def pop(userName):
+    fileName = userName + ".txt"
+
+    try:
+        myFile = open(fileName, "r")
+    except:
+        myFile = open(fileName, "x")
+
+    myFile = open(fileName, "r")
     myString = myFile.read()
     # I find the first instance of the word "interval".
     myString = myString[myString.find("Interval:"):]
@@ -36,8 +50,69 @@ def pop():
     else:
         myString = myString[myString.find("Price:"):]
 
-    myFile = open("storageFile.txt", "w")
+    myFile = open(fileName, "w")
     myFile.write(myString)
+
+def printHelpMenu():
+    print("\n\nHere's a list of all the available commands:\n")
+    print("Type \"H\", or \"HELP\" to see this menu again.")
+    print("Type \"Q\" or \"QUIT\" to quit the program.")
+    print("Type \"P\" or \"PRINT\" to print the list.")
+    print("Type \"N\" or \"NEW\" to add a new item to the list.")
+    print("Type \"D\" or \"DELETE\" to delete an item from the list.")
+    print("Type \"DA\" or \"DELETEALL\" to delete all items from the list.")
+    print("Type \"U\" or \"USER\" to add a username the list.")
+    print("")   # This is just for an extra endline at the end of my menu.
+
+def addUser(userName):
+    fileName = userName + ".txt"
+
+    try:
+        myFile = open(fileName, "r")
+    except:
+        myFile = open(fileName, "x")
+
+    myFile = open(fileName, "r")
+    previousData = myFile.read()
+
+    myFile = open(fileName, "w")
+    myFile.write(previousData + "\n")
+    myFile.write("User: " + userName + "\n")
+
+def deleteAllData(userName):
+    fileName = userName + ".txt"
+
+    try:
+        myFile = open(fileName, "r")
+    except:
+        myFile = open(fileName, "x")
+
+    myFile = open(fileName, "w")
+    myFile.write("")
+
+def getAverage(userName):
+    fileName = userName + ".txt"
+
+    try:
+        myFile = open(fileName, "r")
+    except:
+        myFile = open(fileName, "x")
+
+    myFile = open(fileName, "r")
+    fileLines = myFile.readlines()
+    totalCost = 0
+    totalNumberOfItems = 0
+    for line in fileLines:
+        if line.find("Price: ") != -1:
+            totalNumberOfItems += 1
+            totalCost += float(line[7:])
+    return totalCost/totalNumberOfItems
+
+
+
+
+
+
 
 
 
@@ -77,16 +152,6 @@ def printAverage(list):
         print("$", dailyExpidentureCosts(list)*365)
     else:
         print("ERROR: COMMAND NOT RECOGNIZED")
-
-def printHelpMenu():
-    print("\n\nHere's a list of all the available commands:\n")
-    print("Type \"H\", or \"HELP\" to see this menu again.")
-    print("Type \"E\" or \"EXIT\" to exit the program.")
-    print("Type \"P\", \"PRINT\", or \"PRINTLIST\" to print the list.")
-    print("Type \"N\", \"NEW\", or \"NEWITEM\" to add a new item to the list.")
-    print("Type \"PA\" or \"PRINTAVERAGE\" to print the average costs.")
-    print("Type \"D\", \"DELETE\", or \"DELETEITEM\" to delete an item from the list.")
-    print("")   # This is just for an extra endline at the end of my menu.
 
 def deleteItem(myList):
     print("\nChoose which item to delete: ")
