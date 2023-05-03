@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, session
-from Backend_Functions import addItem, calculate_interest
+from Backend_Functions import addItem1
 
 # import sqlite3
 
@@ -135,7 +135,8 @@ def expenses():
         amount = request.form['amount']
         frequency = request.form['frequency']
         
-        
+        print(amount," : ", frequency)
+        addItem1(amount, frequency)
         return redirect('/expenses')
     else:
         

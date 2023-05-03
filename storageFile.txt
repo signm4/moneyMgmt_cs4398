@@ -1,1 +1,3 @@
 
+Price: 200
+Interval: monthly
