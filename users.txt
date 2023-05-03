@@ -1,4 +1,5 @@
-admin:admin
-user1:user
-bob:123
-user:pass
+admin:admin:0:0
+user1:user:0:0
+bob:123:0:0
+user:pass:0:0
+adnan:123:0:0
