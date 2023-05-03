@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Expenses</title>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <title>$$-MGMT | Expenses</title>
+    <link rel="stylesheet" type="text/css" href="/style">
 </head>
 <body>
     <nav>
         <h1>Money Management</h1>
         <ul>
-            <li><a href="{{ url_for('index') }}">Home</a></li>
-            <li><a href="{{ url_for('budget') }}">Budgeting</a></li>
-            <li><a href="{{ url_for('investing') }}">Investing</a></li>
-            <li><a href="#">Expenses</a></li>
+            <li><a href="/">Home</a></li>
+            <li><a href="/spend">Can I spend it?</a></li>
+            <li><a href="/income">Income</a></li>
+            <li><a class = "active" href="#">Expenses</a></li>
         </ul>
     </nav>
     <main>
         <h2>Add Expense</h2>
-        <form action="{{ url_for('add_expense') }}" method="post">
+        <form action="{{ url_for('expenses') }}" method="post">
             <label for="name">Name:</label>
             <input type="text" id="name" name="name" required>
             <br>

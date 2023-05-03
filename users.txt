@@ -1,3 +1,4 @@
 admin:admin
 user1:user
 bob:123
+user:pass

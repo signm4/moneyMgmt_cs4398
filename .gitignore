@@ -1,4 +1,6 @@
 # Byte-compiled / optimized / DLL files
+motiwala_web
+project.py
 __pycache__/
 *.py[cod]
 *$py.class
