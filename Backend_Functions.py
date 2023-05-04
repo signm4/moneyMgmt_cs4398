@@ -1,5 +1,7 @@
 import numpy as np
 
+
+
 def getIncome(userName):
     fileName = userName + ".txt"
     try:
@@ -14,6 +16,8 @@ def getIncome(userName):
     incomeGained = 0
     incomeGained += float(line)
     return incomeGained
+
+
 
 def getExpenses(userName):
     fileName = userName + ".txt"
@@ -30,6 +34,27 @@ def getExpenses(userName):
     expenses += float(line)
     return expenses
 
+
+
+def getPrices(userName):
+    fileName = userName + ".txt"
+    try:
+        myFile = open(fileName, "r")
+    except:
+        return 0
+
+    # The code below gets the current price of our expenses.
+    fileLines = myFile.readlines()
+    try:
+        line = fileLines[2]
+    except:
+        line = 0
+    totalCost = 0
+    totalCost += float(line)
+    return totalCost
+
+
+
 def addItem(userName, price, interval):
     fileName = userName + ".txt"
 
@@ -42,15 +67,8 @@ def addItem(userName, price, interval):
 
     expenses = getExpenses(userName)
 
-    # The code below gets the current price of our expenses.
-    myFile = open(fileName, "r")
-    fileLines = myFile.readlines()
-    try:
-        line = fileLines[2]
-    except:
-        line = 0
-    totalCost = 0
-    totalCost += float(line)
+    totalCost = getPrices(userName)
+
     interval = (interval.upper())
     price = float(price)
 
@@ -77,14 +95,20 @@ def addItem(userName, price, interval):
     myFile.write(expenses + "\n")
     myFile.write(totalCost + "\n\n")
 
+
+
 def addIncome(userName, price, interval):
     addItem(userName, price, interval)
+
+
 
 def addExpense(userName, price, interval):
     price = float(price)
     price *= -1
     price = str(price)
     addItem(userName, price, interval)
+
+
 
 def printList(userName):
     fileName = userName + ".txt"
@@ -97,6 +121,8 @@ def printList(userName):
     myFile = open(fileName, "r")
     print(myFile.read())
 
+
+
 def printHelpMenu():
     print("\n\nHere's a list of all the available commands:\n")
     print("Type \"H\", or \"HELP\" to see this menu again.")
@@ -107,7 +133,10 @@ def printHelpMenu():
     print("Type \"EXP\" or \"EXPENSE\" to add an expense.")
     print("Type \"INCNUM\" or \"INCOMENUMBER\" to get the total income.")
     print("Type \"EXPNUM\" or \"EXPENSESNUMBER\" to get the total expenses.")
+    print("Type \"PNUM\" or \"PRICESNUMBER\" to get the total expenses.")
     print("")   # This is just for an extra endline at the end of my menu.
+
+
 
 def deleteAllData(userName):
     fileName = userName + ".txt"

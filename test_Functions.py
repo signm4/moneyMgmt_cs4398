@@ -6,7 +6,7 @@ from Backend_Functions import getExpenses
 from Backend_Functions import addExpense
 
 # I test the "deleteAllData" function to see if it creates a file.
-def test_Function1():
+def test_FileCreation_deleteAllData():
 # The three lines below are just the standard procedure for making a file.
     userName = "deleteMe1"
     deleteAllData(userName)
@@ -22,7 +22,7 @@ def test_Function1():
         assert False
 
 # This test checks to see if "addItem" creates a file when called.
-def test_Function2():
+def test_FileCreation_addItem():
 # The three lines below are just the standard procedure for making a file.
     userName = "deleteMe2"
     addItem(userName, "1.00", "MONTHLY")
@@ -39,7 +39,7 @@ def test_Function2():
 
 # The file below checks and tests to see if the "deleteAllData" really does delete all the data
 # in a file.
-def test_Function3():
+def test_deleteAllData():
 # The three lines below are just the standard procedure for making a file.
     userName = "deleteMe3"
     deleteAllData(userName)
@@ -58,7 +58,7 @@ def test_Function3():
         assert False
 
 # This test function checks to see if a price was made and added to the file.
-def test_Function4():
+def test_data_inputting():
 # The three lines below are just the standard procedure for making a file.
     userName = "deleteMe4"
     fileName = userName + ".txt"
@@ -69,7 +69,7 @@ def test_Function4():
         myFile = open(fileName, "r")
         getLines = myFile.readlines()
         # This checks to see if the lines match up with what they're supposed to display.
-        if(getLines[0] == "Income: 1.0\n" and getLines[1] == "Expenses: 0\n" and getLines[2] == "Price: 1.0\n"):
+        if(getLines[0] == "1.0\n" and getLines[1] == "0\n" and getLines[2] == "1.0\n"):
             assert True
         else:
             # If they don't match up, then the test fails.
@@ -79,13 +79,12 @@ def test_Function4():
         # This is just to catch if an unexpected error had occurred.
         assert False
 
-def test_function5():
+def test_expense_retrieval():
     userName = "deleteMe5"
-    fileName = userName + ".txt"
 
     try:
         addExpense(userName, "1.00", "DAILY")
-        if(getExpenses(userName) == 365.0):
+        if(getExpenses(userName) == -365.0):
             assert True
         else:
             print(getExpenses(userName))
@@ -102,3 +101,4 @@ def test_deletion():
     os.remove("deleteMe2.txt")
     os.remove("deleteMe3.txt")
     os.remove("deleteMe4.txt")
+    os.remove("deleteMe5.txt")

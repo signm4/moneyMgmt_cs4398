@@ -6,6 +6,7 @@ from Backend_Functions import addIncome
 from Backend_Functions import addExpense
 from Backend_Functions import getIncome
 from Backend_Functions import getExpenses
+from Backend_Functions import getPrices
 
 print("Start Program")
 
@@ -87,6 +88,8 @@ while EXIT is not True:
         print(getIncome(userName))
     elif userChoice == 'EXPNUM' or userChoice == 'EXPENSESNUMBER':
         print(getExpenses(userName))
+    elif userChoice == 'PNUM' or userChoice == 'PRICESNUMBER':
+        print(getPrices(userName))
     else:
         print("ERROR: COMMAND NOT RECOGNIZED")
 

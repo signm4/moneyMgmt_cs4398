@@ -1,4 +1,0 @@
-Income: 0.0
-Expenses: -730.0
-Price: -730.0
-
