@@ -1,9 +1,0 @@
-Price: 10.0
-Interval: DAILY
-
-Price: 5.0
-Interval: DAILY
-
-Price: 15.0
-Interval: DAILY
-
