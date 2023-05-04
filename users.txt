@@ -3,3 +3,5 @@ user1:user:0:0
 bob:123:0:0
 user:pass:0:0
 adnan:123:0:0
+moalawsi:00001122:0:0
+uni:123:0:0
