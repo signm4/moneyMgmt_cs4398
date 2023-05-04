@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, session, flash
-from Backend_Functions import addItem1
+from Backend_Functions import addExpense, addIncome
+import os
 
 
 
@@ -21,11 +22,13 @@ def do_signup():
     income = 0
     expenses = 0
     if add_user_data(username, password, income, expenses):
-        flash('Account created successfully')
+
+        print("account created, redirect to login")
         return redirect('/')
     else:
-        flash('Username already exists')
-        return redirect('/register')
+        flash('Username already exists, Try Again')
+        print("username exits, redirect to /register") #debugging
+        return redirect('/signup')
     
 # old working signup 
 # @app.route('/register', methods=['POST'])
@@ -45,7 +48,7 @@ def get_all_usernames():
         lines = f.readlines()
 
     # Extract the username from each line and return as a list
-    usernames = [line.split(',')[0].strip() for line in lines]
+    usernames = [line.split(':')[0].strip() for line in lines]
     return usernames
 
 def check_user_credentials(username, password):
@@ -73,11 +76,13 @@ def check_user_credentials(username, password):
 #     return True
 
 def add_user_data(username, password, income, expenses):
+    if username in get_all_usernames():
+        return False
     # Open the user database file in append mode
     with open('users.txt', 'a') as f:
         # Write the user data to a new line in the file
-        f.write(f"{username}:{password}{income}:{expenses}\n")
-
+        f.write(f"{username}:{password}:{income}:{expenses}\n")
+    return True
 
 def get_user_data(username):
     print ("Current user: ",username) #debugging
@@ -162,11 +167,11 @@ def expenses():
         amount = request.form['amount']
         frequency = request.form['frequency']
         
-        print(amount," : ", frequency)
-        addItem1(amount, frequency)
+        print("expenses ", username, " : ", amount, " : ", frequency) #debugging 
+        addExpense(username, amount, frequency)
+        flash("expense added")
         return redirect('/expenses')
     else:
-        
         return render_template('expenses.html', expenses=expenses, username = username)
     
 @app.route('/spend', methods = ['GET', 'POST'])
@@ -183,8 +188,23 @@ def income():
     if request.method == 'POST':
         amount = request.form['amount']
         frequency = request.form['frequency']
+        print("Income ", username, " : ", amount, " : ", frequency, " sent to backend ") #debugging 
+        addIncome(username, amount, frequency)
+        flash("income added")
 
     return render_template('income.html', username = username)
+
+def get_expenses(username):
+    """Retrieve the user's expenses from their data file."""
+    filename = os.path.join(f"{username}.txt")
+    if not os.path.exists(filename):
+        create_user_file(username)
+    with open(filename, 'r') as f:
+        expenses = []
+        for line in f:
+            amount, category = line.strip().split(',')
+            expenses.append((amount, category))
+        return expenses
 
 
     
