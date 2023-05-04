@@ -1,0 +1,4 @@
+Income: 665.0
+Expenses: -300.0
+Price: 365.0
+

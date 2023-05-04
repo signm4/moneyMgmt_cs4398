@@ -1,11 +1,11 @@
 from Backend_Functions import printList
 from Backend_Functions import addItem
-from Backend_Functions import pop
 from Backend_Functions import printHelpMenu
 from Backend_Functions import deleteAllData
-from Backend_Functions import getAverage
 from Backend_Functions import addIncome
 from Backend_Functions import addExpense
+from Backend_Functions import getIncome
+from Backend_Functions import getExpenses
 
 print("Start Program")
 
@@ -74,8 +74,6 @@ while EXIT is not True:
         intervalChoice = askForInterval()
         addItem(userName, priceChoice, intervalChoice)
     elif userChoice == 'D' or userChoice == "DELETE":
-        pop(userName)
-    elif userChoice == 'DA' or userChoice == "DELETEALL":
         deleteAllData(userName)
     elif userChoice == 'INC' or userChoice == 'INCOME':
         priceChoice = askForNumber()
@@ -85,8 +83,10 @@ while EXIT is not True:
         priceChoice = askForNumber()
         intervalChoice = askForInterval()
         addExpense(userName, priceChoice, intervalChoice)
-    elif userChoice == 'TEST':
-        getAverage(userName)
+    elif userChoice == 'INCNUM' or userChoice == 'INCOMENUMBER':
+        print(getIncome(userName))
+    elif userChoice == 'EXPNUM' or userChoice == 'EXPENSESNUMBER':
+        print(getExpenses(userName))
     else:
         print("ERROR: COMMAND NOT RECOGNIZED")
 
