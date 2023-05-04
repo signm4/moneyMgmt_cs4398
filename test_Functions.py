@@ -2,6 +2,8 @@ import os
 import time
 from Backend_Functions import deleteAllData
 from Backend_Functions import addItem
+from Backend_Functions import getExpenses
+from Backend_Functions import addExpense
 
 # I test the "deleteAllData" function to see if it creates a file.
 def test_Function1():
@@ -59,7 +61,6 @@ def test_Function3():
 def test_Function4():
 # The three lines below are just the standard procedure for making a file.
     userName = "deleteMe4"
-    deleteAllData(userName)
     fileName = userName + ".txt"
 
     try:
@@ -68,15 +69,29 @@ def test_Function4():
         myFile = open(fileName, "r")
         getLines = myFile.readlines()
         # This checks to see if the lines match up with what they're supposed to display.
-        if(getLines[0] == "Price: 1.00\n" and getLines[1] == "Interval: YEARLY\n"):
+        if(getLines[0] == "Income: 1.0\n" and getLines[1] == "Expenses: 0\n" and getLines[2] == "Price: 1.0\n"):
             assert True
         else:
             # If they don't match up, then the test fails.
+            print(getLines[0])
             assert False
     except:
         # This is just to catch if an unexpected error had occurred.
         assert False
 
+def test_function5():
+    userName = "deleteMe5"
+    fileName = userName + ".txt"
+
+    try:
+        addExpense(userName, "1.00", "DAILY")
+        if(getExpenses(userName) == 365.0):
+            assert True
+        else:
+            print(getExpenses(userName))
+            assert False
+    except:
+        assert False
 
 # this "test" just deletes all the files created from the previous tests.
 def test_deletion():
