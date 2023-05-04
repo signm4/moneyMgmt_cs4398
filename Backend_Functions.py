@@ -1,15 +1,20 @@
 import numpy as np
 
 
-
+# Returns the income as a float value
 def getIncome(userName):
+    # Sets filename to the current user and appends a .txt
     fileName = userName + ".txt"
     try:
+        # tries to open this file in case it exists.
         myFile = open(fileName, "r")
     except:
+        # If it doesn't exist, then line is set to 0. Line is what is being added to the income.
         line = 0
-    fileLines = myFile.readlines()
+
     try:
+        # I read the lines into a variable "fileLines"
+        fileLines = myFile.readlines()
         line = fileLines[0]
     except:
         line = 0
@@ -25,8 +30,8 @@ def getExpenses(userName):
         myFile = open(fileName, "r")
     except:
         return 0
-    fileLines = myFile.readlines()
     try:
+        fileLines = myFile.readlines()
         line = fileLines[1]
     except:
         return 0
@@ -44,8 +49,8 @@ def getPrices(userName):
         return 0
 
     # The code below gets the current price of our expenses.
-    fileLines = myFile.readlines()
     try:
+        fileLines = myFile.readlines()
         line = fileLines[2]
     except:
         line = 0
