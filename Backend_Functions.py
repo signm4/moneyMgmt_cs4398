@@ -5,12 +5,14 @@ def getIncome(userName):
     try:
         myFile = open(fileName, "r")
     except:
-        return 0
+        line = 0
     fileLines = myFile.readlines()
+    try:
+        line = fileLines[0]
+    except:
+        line = 0
     incomeGained = 0
-    for line in fileLines:
-        if line.find("Income: ") != -1:
-            incomeGained += float(line[8:])
+    incomeGained += float(line)
     return incomeGained
 
 def getExpenses(userName):
@@ -20,10 +22,12 @@ def getExpenses(userName):
     except:
         return 0
     fileLines = myFile.readlines()
+    try:
+        line = fileLines[1]
+    except:
+        return 0
     expenses = 0
-    for line in fileLines:
-        if line.find("Expenses: ") != -1:
-            expenses += float(line[10:])
+    expenses += float(line)
     return expenses
 
 def addItem(userName, price, interval):
@@ -41,10 +45,12 @@ def addItem(userName, price, interval):
     # The code below gets the current price of our expenses.
     myFile = open(fileName, "r")
     fileLines = myFile.readlines()
+    try:
+        line = fileLines[2]
+    except:
+        line = 0
     totalCost = 0
-    for line in fileLines:
-        if line.find("Price: ") != -1:
-            totalCost += float(line[7:])
+    totalCost += float(line)
     interval = (interval.upper())
     price = float(price)
 
@@ -67,9 +73,9 @@ def addItem(userName, price, interval):
     incomeGained = str(incomeGained)
     expenses = str(expenses)
     totalCost = str(totalCost)
-    myFile.write("Income: " + incomeGained + "\n")
-    myFile.write("Expenses: " + expenses + "\n")
-    myFile.write("Price: " + totalCost + "\n\n")
+    myFile.write(incomeGained + "\n")
+    myFile.write(expenses + "\n")
+    myFile.write(totalCost + "\n\n")
 
 def addIncome(userName, price, interval):
     addItem(userName, price, interval)
