@@ -80,8 +80,8 @@ def getPrices(userName):
 
 # Checks to see if you can spend a specific amount of money.
 def can_I_Spend_It(userName, howMuchIwantToSpend):
-    return (getPrices(userName) - howMuchIwantToSpend)/12
-
+    return (getPrices(userName) - float(howMuchIwantToSpend))/12
+ 
 
 # This function adds an item to the user file.
 def addItem(userName, price, interval):
