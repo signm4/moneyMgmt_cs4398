@@ -8,18 +8,37 @@ def addItem(userName, price, interval):
     except:
         myFile = open(fileName, "x")
 
+    # The code below gets the current price of our expenses.
     myFile = open(fileName, "r")
-    previousData = myFile.read()
+    fileLines = myFile.readlines()
+    totalCost = 0
+    for line in fileLines:
+        if line.find("Price: ") != -1:
+            totalCost += float(line[7:])
+
+    price = float(price)
+    # I multiply the price to set it to yearly standards.
+    if(interval == "YEARLY"):
+        totalCost = totalCost + price
+    elif(interval == "MONTHLY"):
+        totalCost = totalCost + price*12
+    elif(interval == "WEEKLY"):
+        totalCost = totalCost + price*52
+    elif(interval == "DAILY"):
+        totalCost = totalCost + price*365
 
     myFile = open(fileName, "w")
-    myFile.write(previousData)
-    myFile.write("Price: " + price + "\n")
-    myFile.write("Interval: " + interval + "\n\n")
+    totalCost = str(totalCost)
+    myFile.write("Price: " + totalCost + "\n")
+    myFile.write("Interval: YEARLY\n\n")
 
 def addIncome(userName, price, interval):
     addItem(userName, price, interval)
 
 def addExpense(userName, price, interval):
+    price = float(price)
+    price *= -1
+    price = str(price)
     addItem(userName, price, interval)
 
 def printList(userName):
@@ -58,26 +77,12 @@ def printHelpMenu():
     print("Type \"H\", or \"HELP\" to see this menu again.")
     print("Type \"Q\" or \"QUIT\" to quit the program.")
     print("Type \"P\" or \"PRINT\" to print the list.")
-    print("Type \"N\" or \"NEW\" to add a new item to the list.")
     print("Type \"D\" or \"DELETE\" to delete an item from the list.")
     print("Type \"DA\" or \"DELETEALL\" to delete all items from the list.")
-    print("Type \"U\" or \"USER\" to add a username the list.")
+    print("Type \"INC\" or \"INCOME\" to add an income.")
+    print("Type \"EXP\" or \"EXPENSE\" to add an expense.")
+    print("Type \"DA\" or \"DELETEALL\" to delete all items from the list.")
     print("")   # This is just for an extra endline at the end of my menu.
-
-def addUser(userName):
-    fileName = userName + ".txt"
-
-    try:
-        myFile = open(fileName, "r")
-    except:
-        myFile = open(fileName, "x")
-
-    myFile = open(fileName, "r")
-    previousData = myFile.read()
-
-    myFile = open(fileName, "w")
-    myFile.write(previousData + "\n")
-    myFile.write("User: " + userName + "\n")
 
 def deleteAllData(userName):
     fileName = userName + ".txt"
