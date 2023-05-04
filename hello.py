@@ -181,7 +181,7 @@ def expenses():
 def spend():
     username = session['username']
     spend = getPrices(username)/12
-    spend = float(spend)
+    spend = float(round(spend, 2))
     if request.method == 'POST':
         amount = request.form['amount']
         amount = float(amount)
