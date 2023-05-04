@@ -29,18 +29,6 @@ def do_signup():
         flash('Username already exists, Try Again')
         print("username exits, redirect to /register") #debugging
         return redirect('/signup')
-    
-# old working signup 
-# @app.route('/register', methods=['POST'])
-# def do_signup():
-#     username = request.form['username']
-#     password = request.form['password']
-
-#     # save the username and password to a file
-#     with open('users.txt', 'a') as file:
-#         file.write(f"{username}:{password}:{0}:{0}\n")
-
-#     return render_template('login.html', username=username)
 
 def get_all_usernames():
     # Open the user database file and read all lines
@@ -100,16 +88,6 @@ def do_login():
         username = request.form['username']
         password = request.form['password']
 
-    # check if the username and password are correct by reading the file
-    # with open('users.txt', 'r') as file:
-    #     users = file.readlines()
-
-    # for user in users:
-    #     u, p = user.strip().split(':')
-    #     if u == username and p == password:
-    #         return render_template('index.html', username=request.form['username'])
-
-    # return "Invalid username or password."
         if check_user_credentials(username, password):
             session['username'] = username
             return redirect('/index')
@@ -205,34 +183,6 @@ def income():
         flash("income added")
 
     return render_template('income.html', username = username)
-
-# def get_expenses(username):
-#     filename = username + ".txt"
-#     with open(filename, "r") as file:
-#         # Skip the first line (income)
-#         next(file)
-#         # Read the second line (expense)
-#         expense = float(file.readline().strip())
-#     return expense
-
-# def get_income(username):
-#     filename = username + ".txt"
-#     with open(filename, "r") as file:
-#         # Skip the first line (income)
-#         # Read the second line (expense)
-#         income = float(file.readline().strip())
-#     return income
-
-# def get_spend(username):
-#     filename = username + ".txt"
-#     with open(filename, "r") as file:
-#         # Skip the first line (income)
-#         next(file)
-#         # Skip the second line (expense)
-#         next(file)
-#         # Read the third line (spend)
-#         spend = float(file.readline().strip())
-#     return spend
 
     
 if __name__ == '__main__':
