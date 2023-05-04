@@ -123,6 +123,18 @@
     <!-- <link rel="stylesheet" type="text/css" href="/style"> -->
 </head>
 <body>
+    {% block content %}
+    <div class="container">
+      {% for message in get_flashed_messages() %}
+      <div class="alert alert-warning">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        {{ message }}
+      </div>
+      {% endfor %}
+
+      {% block page_content %}{% endblock %}
+    </div>
+    {% endblock %}
     <nav>
         <h1>Money Management</h1>
         <h3>Welcome, <i>{{ username }}!</i></h3>
@@ -136,7 +148,8 @@
     </nav>
     <main>
         <h2>Can I spend it?</h2>
-        <h4>This page sees if you are able to spend "X" money in this month.<br>Simply put your desired amount you like to spend below and click the button.</h4>
+        <h4>This page sees if you are able to spend "X" money in <u>this month.</u><br>Simply put your desired amount you like to spend below and click the button.</h4>
+        <h4>You have available, ${{ spend }} this month.</h4>
         <form action="{{ url_for('spend') }}" method="post">
             <!-- <label for="name">Name:</label>
             <input type="text" id="name" name="name" required>

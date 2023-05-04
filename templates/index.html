@@ -135,34 +135,20 @@
             <li style="float:right"><a href ="/logout">Log Out</a></li>
         </ul>
     </nav>
-    <div class="container">
-        <div class="row">
-          <div class="col-sm-4">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">Income</h5>
-                <p class="card-text">{{ current_income }}</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-4">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">Expenses</h5>
-                <p class="card-text">{{ current_expenses }}</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-4">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">Left Over</h5>
-                <p class="card-text">{{ current_leftover }}</p>
-              </div>
-            </div>
-          </div>
+    <body>
+        <div class="box">
+          <h3>Income</h3>
+          <p>${{ income }}</p>
         </div>
-      </div>
+        <div class="box">
+          <h3>Expenses</h3>
+          <p>${{ expenses }}</p>
+        </div>
+        <div class="box">
+          <h3>Money Available</h3>
+          <p>${{ spend }}</p>
+        </div>
+      </body>
       
 </body>
 

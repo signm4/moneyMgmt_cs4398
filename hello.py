@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, session, flash
-from Backend_Functions import addExpense, addIncome
+from Backend_Functions import addExpense, addIncome, getExpenses, getIncome, getPrices, can_I_Spend_It
 import os
 
 
@@ -135,9 +135,12 @@ def index():
     # Get the user's data from the database
     username = session['username']
     user_data = get_user_data(username)
+    income = getIncome(username)
+    expenses = getExpenses(username)
+    spend = getPrices(username)
 
     # Render the template with the user's data
-    return render_template('index.html', username=username, user_data=user_data)
+    return render_template('index.html', username=username, user_data=user_data, income=income, expenses=expenses, spend=spend)
 
 @app.route('/home')
 def go_home():
@@ -177,10 +180,19 @@ def expenses():
 @app.route('/spend', methods = ['GET', 'POST'])
 def spend():
     username = session['username']
+    spend = getPrices(username)/12
+    spend = float(spend)
     if request.method == 'POST':
         amount = request.form['amount']
-
-    return render_template('spend.html', username = username)
+        amount = float(amount)
+        # spendx = can_I_Spend_It(username, amount)
+        # print ("this is the backend function can i spend it: ", spendx)
+        print("this is spend: ", spend)
+        if (amount <= spend):
+            flash("You are good to go, make sure to add this as a one time expense if you decide to spend it.")
+        else:
+            flash("You cannot spend more than you have")
+    return render_template('spend.html', username = username, spend= spend)
 
 @app.route('/income', methods = ['GET', 'POST'])
 def income():
@@ -194,18 +206,33 @@ def income():
 
     return render_template('income.html', username = username)
 
-def get_expenses(username):
-    """Retrieve the user's expenses from their data file."""
-    filename = os.path.join(f"{username}.txt")
-    if not os.path.exists(filename):
-        create_user_file(username)
-    with open(filename, 'r') as f:
-        expenses = []
-        for line in f:
-            amount, category = line.strip().split(',')
-            expenses.append((amount, category))
-        return expenses
+# def get_expenses(username):
+#     filename = username + ".txt"
+#     with open(filename, "r") as file:
+#         # Skip the first line (income)
+#         next(file)
+#         # Read the second line (expense)
+#         expense = float(file.readline().strip())
+#     return expense
 
+# def get_income(username):
+#     filename = username + ".txt"
+#     with open(filename, "r") as file:
+#         # Skip the first line (income)
+#         # Read the second line (expense)
+#         income = float(file.readline().strip())
+#     return income
+
+# def get_spend(username):
+#     filename = username + ".txt"
+#     with open(filename, "r") as file:
+#         # Skip the first line (income)
+#         next(file)
+#         # Skip the second line (expense)
+#         next(file)
+#         # Read the third line (spend)
+#         spend = float(file.readline().strip())
+#     return spend
 
     
 if __name__ == '__main__':
