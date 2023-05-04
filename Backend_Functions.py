@@ -15,11 +15,17 @@ def getIncome(userName):
     try:
         # I read the lines into a variable "fileLines"
         fileLines = myFile.readlines()
+        # I get the first line of the file, which should store the income number.
         line = fileLines[0]
     except:
+        # If the file doesn't exist, line is just 0.
         line = 0
+    
+    # Income gained is set to 0 -- just to initialize it as an integer.
     incomeGained = 0
+    # Income gained is whatever line is. Line represents what exists in the file.
     incomeGained += float(line)
+    # I return the float version of the income gained.
     return incomeGained
 
 
@@ -57,6 +63,10 @@ def getPrices(userName):
     totalCost = 0
     totalCost += float(line)
     return totalCost
+
+
+def can_I_Spend_It(userName, howMuchIwantToSpend):
+    return getPrices(userName) - howMuchIwantToSpend
 
 
 
