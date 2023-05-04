@@ -146,7 +146,7 @@ def addIncome(userName, price, interval):
     addItem(userName, price, interval)
 
 
-# I just invert the price value here.
+# I just invert the price value here -- since an expense is a loss of money.
 def addExpense(userName, price, interval):
     price = float(price)
     price *= -1
@@ -154,20 +154,25 @@ def addExpense(userName, price, interval):
     addItem(userName, price, interval)
 
 
-
+# I print the .txt file. This is purely for testing purposes.
 def printList(userName):
+    # I create the filename to be whateer the username is with .txt appended on to it. 
     fileName = userName + ".txt"
 
     try:
+        # If this file exists, it will be opened.
         myFile = open(fileName, "r")
     except:
+        # If it doesn't, then it will be created.
         myFile = open(fileName, "x")
 
+    # I open the file
     myFile = open(fileName, "r")
+    # I print the contents of the file.
     print(myFile.read())
 
 
-
+# This just prints out the help menu.
 def printHelpMenu():
     print("\n\nHere's a list of all the available commands:\n")
     print("Type \"H\", or \"HELP\" to see this menu again.")
@@ -182,14 +187,19 @@ def printHelpMenu():
     print("")   # This is just for an extra endline at the end of my menu.
 
 
-
+# This deletes the contents of the user's .txt file.
 def deleteAllData(userName):
+    # I load the username and append .txt so I can access the .txt file.
     fileName = userName + ".txt"
 
     try:
+        # I try to open the file to see if it exists.
         myFile = open(fileName, "r")
     except:
+        # If it doesn't exist, then I create it.
         myFile = open(fileName, "x")
 
+    # I open the file.
     myFile = open(fileName, "w")
+    # I set the file to have nothing written in it.
     myFile.write("")

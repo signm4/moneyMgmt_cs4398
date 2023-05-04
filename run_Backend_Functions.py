@@ -60,7 +60,9 @@ userName = "null"
 userName = input("Select Username: ")
 
 while EXIT is not True:
+    # This while-loop asks for the user's input every loop.
     userChoice = input("Input: ")
+    # This capitalizes all of the letters in the user's string.
     userChoice = userChoice.upper()
 
     if userChoice == 'H' or userChoice == 'HELP':

@@ -79,17 +79,22 @@ def test_data_inputting():
         # This is just to catch if an unexpected error had occurred.
         assert False
 
+# This function tests if the "getExpenses()" function works correctly.
 def test_expense_retrieval():
+    # The line below is just the standard procedure for making a file.
     userName = "deleteMe5"
-
+    
     try:
+        # I try to add an expense to a file.
         addExpense(userName, "1.00", "DAILY")
+        # If the expense is -365 -- which it's supposed to be, I assert True.
         if(getExpenses(userName) == -365.0):
             assert True
         else:
-            print(getExpenses(userName))
+            # If it's not -365, I assert false.
             assert False
     except:
+        # If the file doesn't run, I also assert false.
         assert False
 
 # this "test" just deletes all the files created from the previous tests.
